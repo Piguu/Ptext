@@ -1,0 +1,6 @@
+name: ptext
+version: ${project.version}
+main: minecraft.ponints.Ponints
+commands:
+  ptext:
+    description: 点券操作
