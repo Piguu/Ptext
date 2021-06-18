@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class PonintConfig extends AllConfig{
 
-    private static final String path = "plugins/Ponints/ponint.yml";
+    private static final String path = "plugins/Ptext/point.yml";
 
     public PonintConfig() {
         super(path);

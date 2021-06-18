@@ -1,10 +1,7 @@
 package minecraft.ponints.commands;
 
 import minecraft.ponints.config.AllConfig;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
 public abstract class AllCommand implements CommandExecutor {
@@ -27,7 +24,7 @@ public abstract class AllCommand implements CommandExecutor {
     }
 
     private void execute_op(CommandSender sender, Command command, String label, String[] args){
-        if (sender instanceof Player || sender instanceof ConsoleCommandSender){
+        if (sender instanceof Player || sender instanceof ConsoleCommandSender || sender instanceof RemoteConsoleCommandSender){
             if (command.getName().equals(command_name)){
 
                 if (args.length>0){

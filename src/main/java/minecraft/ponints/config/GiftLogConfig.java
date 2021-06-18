@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class GiftLogConfig extends AllConfig{
 
-    private static final String path = "plugins/Ponints/giftlog.yml";
+    private static final String path = "plugins/Ptext/giftlog.yml";
 
     public GiftLogConfig(){
         super(path);

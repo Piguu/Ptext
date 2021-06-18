@@ -16,13 +16,13 @@ import java.util.Map;
  */
 public class GiftConfig extends AllConfig{
 
-    private static final String ponint = "ponint";
+    private static final String ponint = "point";
 
     private static final String context = "context";
 
     private static final String cmds = "cmds";
 
-    private static final String path = "plugins/Ponints/gift.yml";
+    private static final String path = "plugins/Ptext/gift.yml";
 
     public GiftConfig(){
         super(path);

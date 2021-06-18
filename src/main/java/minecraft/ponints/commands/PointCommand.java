@@ -1,5 +1,6 @@
 package minecraft.ponints.commands;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import minecraft.ponints.Menum.ConfigType;
 import minecraft.ponints.config.AllConfig;
 import minecraft.ponints.config.GiftConfig;
@@ -9,6 +10,7 @@ import minecraft.ponints.giftView.GiftInventory;
 import minecraft.ponints.manager.ConfigManager;
 import minecraft.ponints.manager.GiftInventoryManager;
 import minecraft.ponints.untils.Untiles;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,6 +24,10 @@ public class PointCommand extends AllCommand {
 
     @Override
     protected void gift(CommandSender sender, String command_name, String label, String[] args) {
+
+        String s = PlaceholderAPI.setPlaceholders((Player) sender, "点券%ptext_point%");
+        sender.sendMessage(s);
+
         if (!(sender instanceof Player)){
             this.sendMessage(sender,"该命令只能玩家调用！");
             return;
@@ -91,6 +97,8 @@ public class PointCommand extends AllCommand {
                 int new_ponint = old_ponint + ponint;
                 ponintConfig.setPonint(player_name,new_ponint);
                 this.sendMessage(sender,"添加成功，此次为 &e"+player_name+" &f添加了 &4"+ponint+" &f累充点券");
+                this.ServersendToPlayerMessage(sender,player_name,"您当前点券变化,增添了 &4"+ponint+" &f累充点券");
+
             }catch (Exception e){
                 this.sendErrorMessage(sender);
             }
@@ -108,6 +116,7 @@ public class PointCommand extends AllCommand {
                 int  ponint = Integer.valueOf(args[2]);
                 ponintConfig.setPonint(player_name,ponint);
                 this.sendMessage(sender,"更新成功，此次修改 &e"+player_name+" &f的点券为 &4"+ponint);
+                this.ServersendToPlayerMessage(sender,player_name,"点券变化,您当前累充点券为 &4"+ponint);
             }catch (Exception e){
                 this.sendMessage(sender,"/"+command_name+" update 玩家 &4点券数量");
             }
@@ -144,6 +153,13 @@ public class PointCommand extends AllCommand {
         this.sendMessage(sender,"&7/"+command_name+" show 玩家 [查看指定玩家的点券数量]");
         this.sendMessage(sender,"&7/"+command_name+" reload [刷新配置文件]");
         this.sendMessage(sender,"&7/"+command_name+" open [打开点券背包]");
+    }
+
+    private void ServersendToPlayerMessage(CommandSender sender,String player_name,String message){
+        Player player = Bukkit.getServer().getPlayer(player_name);
+        if (player!=null && !sender.getName().equals(player_name)){
+            this.sendMessage(player,message);
+        }
     }
 
     private void sendMessage(CommandSender sender,String message){
